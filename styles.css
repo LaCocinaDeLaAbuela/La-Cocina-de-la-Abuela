@@ -65,7 +65,7 @@ header {
   color: var(--color-primary);
   text-decoration: none;
   font-weight: bold;
-  transform: rotate(-2deg);
+  transform: rotate(0deg);
 }
 
 nav ul {
