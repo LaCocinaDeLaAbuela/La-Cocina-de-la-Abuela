@@ -1,0 +1,334 @@
+/* ==========================================================================
+   Variables y Configuración Inicial
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Sniglet&display=swap');
+
+:root {
+  --color-bg: #F6EEDF;
+  --color-primary: #E65100;
+  --color-secondary: #D32F2F;
+  --color-accent: #00838F;
+  --color-text: #3E2723;
+  --color-white: #FFFFFF;
+
+  /* Radios asimétricos para efecto crayón/boceto */
+  --border-handdrawn-1: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  --border-handdrawn-2: 15px 225px 15px 255px / 255px 15px 225px 15px;
+  --border-handdrawn-3: 20px 255px 30px 220px / 225px 20px 240px 15px;
+
+  /* Sombra sólida desfasada */
+  --shadow-solid: 6px 6px 0px var(--color-text);
+  --shadow-hover: 2px 2px 0px var(--color-text);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Nunito', sans-serif;
+  line-height: 1.6;
+  background-image: radial-gradient(rgba(62, 39, 35, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Sniglet', cursive;
+  color: var(--color-text);
+  letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   Estructura Global (Header, Nav, Footer)
+   ========================================================================== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 5%;
+  background-color: var(--color-white);
+  border-bottom: 4px solid var(--color-text);
+  border-radius: 0 0 15px 255px / 0 0 225px 15px;
+  box-shadow: 0px 8px 0px -4px var(--color-text);
+  margin-bottom: 2rem;
+}
+
+.logo {
+  font-size: 1.8rem;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: bold;
+  transform: rotate(-2deg);
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  border: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+nav a:hover,
+nav a.active {
+  border: 3px solid var(--color-text);
+  border-radius: var(--border-handdrawn-2);
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  box-shadow: 4px 4px 0px var(--color-text);
+  transform: translateY(-2px);
+}
+
+footer {
+  text-align: center;
+  padding: 2rem;
+  margin-top: 4rem;
+  background-color: var(--color-white);
+  border-top: 4px solid var(--color-text);
+  border-radius: 255px 15px 0 0 / 15px 225px 0 0;
+}
+
+/* ==========================================================================
+   Utilidades Estilo Crayón (Tarjetas y Botones)
+   ========================================================================== */
+.crayon-box {
+  background-color: var(--color-white);
+  border: 4px solid var(--color-text);
+  border-radius: var(--border-handdrawn-1);
+  padding: 2rem;
+  box-shadow: var(--shadow-solid);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.crayon-box:nth-child(even) {
+  border-radius: var(--border-handdrawn-3);
+}
+
+.crayon-box:hover {
+  transform: translate(4px, 4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.crayon-btn {
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: 0.8rem 2rem;
+  font-family: 'Sniglet', cursive;
+  font-size: 1.2rem;
+  text-decoration: none;
+  border: 3px solid var(--color-text);
+  border-radius: var(--border-handdrawn-2);
+  box-shadow: var(--shadow-solid);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.crayon-btn:hover {
+  background-color: var(--color-secondary);
+  transform: translate(4px, 4px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* ==========================================================================
+   Layouts por Página (Grid / Flexbox)
+   ========================================================================== */
+main {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 60vh;
+}
+
+/* Index */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  border: 4px solid var(--color-text);
+  border-radius: var(--border-handdrawn-3);
+  box-shadow: var(--shadow-solid);
+  margin-bottom: 4rem;
+}
+
+.hero h1 {
+  color: var(--color-white);
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(2px 2px 0px var(--color-text));
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  max-width: 600px;
+}
+
+.grid-resumen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.grid-resumen .crayon-box:nth-child(1) {
+  border-color: var(--color-primary);
+}
+
+.grid-resumen .crayon-box:nth-child(2) {
+  border-color: var(--color-secondary);
+}
+
+.grid-resumen .crayon-box:nth-child(3) {
+  border-color: var(--color-accent);
+}
+
+/* Medios & Donde Comer & Proyecto (Grid genérico) */
+.page-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+}
+
+.media-grid,
+.restaurants-grid,
+.info-blocks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2.5rem;
+}
+
+.placeholder-img {
+  width: 100%;
+  height: 200px;
+  background-color: rgba(62, 39, 35, 0.1);
+  border: 3px dashed var(--color-text);
+  border-radius: var(--border-handdrawn-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  font-family: 'Sniglet', cursive;
+  color: var(--color-text);
+  opacity: 0.7;
+}
+
+.info-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.info-blocks article {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+}
+
+.info-blocks article .text-content {
+  flex: 1;
+  min-width: 300px;
+}
+
+.info-blocks article .placeholder-img {
+  flex: 1;
+  min-width: 300px;
+  height: 300px;
+}
+
+
+/* ==========================================================================
+   Media Queries (Adaptación para Dispositivos Móviles)
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+
+  /* Cabecera: Apila el logo y el menú de navegación */
+  header {
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+    gap: 1.5rem;
+    border-radius: 0 0 15px 15px;
+    /* Bordes más simples en móvil */
+  }
+
+  /* Menú: Permite que los botones bajen de línea si no caben */
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8rem;
+  }
+
+  /* Reduce el tamaño de fuente y padding en los botones del menú */
+  nav a {
+    font-size: 0.95rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  /* Banner Principal (Hero): Reduce márgenes y tamaño de texto */
+  .hero {
+    padding: 2.5rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  /* Títulos de páginas: más compactos */
+  .page-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  /* Ajuste de Grid: Permite columnas un poco más estrechas en móviles pequeños */
+  .grid-resumen {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+
+  .media-grid,
+  .restaurants-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+
+  /* Ajuste de sección "Sobre el proyecto" (Flexbox) */
+  .info-blocks article {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .info-blocks article .placeholder-img {
+    width: 100%;
+    min-width: unset;
+    height: 250px;
+  }
+
+  /* Cajas Crayón: Menos padding en móviles para ganar espacio de lectura */
+  .crayon-box {
+    padding: 1.5rem;
+  }
+}
