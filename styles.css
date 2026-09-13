@@ -11,14 +11,12 @@
   --color-text: #3E2723;
   --color-white: #FFFFFF;
 
-  /* Radios asimétricos para efecto crayón/boceto */
-  --border-handdrawn-1: 255px 15px 225px 15px / 15px 225px 15px 255px;
-  --border-handdrawn-2: 15px 225px 15px 255px / 255px 15px 225px 15px;
-  --border-handdrawn-3: 20px 255px 30px 220px / 225px 20px 240px 15px;
+  /* Bordes profesionales y rectos */
+  --border-radius-standard: 8px;
 
-  /* Sombra sólida desfasada */
-  --shadow-solid: 6px 6px 0px var(--color-text);
-  --shadow-hover: 2px 2px 0px var(--color-text);
+  /* Sombras suaves y modernas */
+  --shadow-solid: 0 4px 10px rgba(62, 39, 35, 0.08);
+  --shadow-hover: 0 8px 20px rgba(62, 39, 35, 0.15);
 }
 
 * {
@@ -32,14 +30,9 @@ body {
   color: var(--color-text);
   font-family: 'Nunito', sans-serif;
   line-height: 1.6;
-  background-image: radial-gradient(rgba(62, 39, 35, 0.05) 1px, transparent 1px);
-  background-size: 20px 20px;
 }
 
-h1,
-h2,
-h3,
-h4 {
+h1, h2, h3, h4 {
   font-family: 'Sniglet', cursive;
   color: var(--color-text);
   letter-spacing: 1px;
@@ -54,18 +47,14 @@ header {
   align-items: center;
   padding: 1.5rem 5%;
   background-color: var(--color-white);
-  border-bottom: 4px solid var(--color-text);
-  border-radius: 0 0 15px 255px / 0 0 225px 15px;
-  box-shadow: 0px 8px 0px -4px var(--color-text);
+  border-bottom: 1px solid rgba(62, 39, 35, 0.1);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
   margin-bottom: 2rem;
 }
 
-.logo {
-  font-size: 1.8rem;
-  color: var(--color-primary);
-  text-decoration: none;
-  font-weight: bold;
-  transform: rotate(0deg);
+.logo img {
+  max-height: 60px; /* Ajusta el tamaño de IMG_0902.PNG aquí */
+  width: auto;
 }
 
 nav ul {
@@ -80,17 +69,15 @@ nav a {
   font-weight: 700;
   font-size: 1.1rem;
   padding: 0.5rem 1rem;
-  border: 3px solid transparent;
+  border-radius: var(--border-radius-standard);
   transition: all 0.3s ease;
 }
 
 nav a:hover,
 nav a.active {
-  border: 3px solid var(--color-text);
-  border-radius: var(--border-handdrawn-2);
   background-color: var(--color-accent);
   color: var(--color-white);
-  box-shadow: 4px 4px 0px var(--color-text);
+  box-shadow: var(--shadow-solid);
   transform: translateY(-2px);
 }
 
@@ -99,28 +86,23 @@ footer {
   padding: 2rem;
   margin-top: 4rem;
   background-color: var(--color-white);
-  border-top: 4px solid var(--color-text);
-  border-radius: 255px 15px 0 0 / 15px 225px 0 0;
+  border-top: 1px solid rgba(62, 39, 35, 0.1);
 }
 
 /* ==========================================================================
-   Utilidades Estilo Crayón (Tarjetas y Botones)
+   Utilidades (Tarjetas y Botones Profesionales)
    ========================================================================== */
 .crayon-box {
   background-color: var(--color-white);
-  border: 4px solid var(--color-text);
-  border-radius: var(--border-handdrawn-1);
+  border: 1px solid rgba(62, 39, 35, 0.1);
+  border-radius: var(--border-radius-standard);
   padding: 2rem;
   box-shadow: var(--shadow-solid);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.crayon-box:nth-child(even) {
-  border-radius: var(--border-handdrawn-3);
-}
-
 .crayon-box:hover {
-  transform: translate(4px, 4px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-hover);
 }
 
@@ -132,8 +114,8 @@ footer {
   font-family: 'Sniglet', cursive;
   font-size: 1.2rem;
   text-decoration: none;
-  border: 3px solid var(--color-text);
-  border-radius: var(--border-handdrawn-2);
+  border: none;
+  border-radius: var(--border-radius-standard);
   box-shadow: var(--shadow-solid);
   cursor: pointer;
   transition: all 0.2s;
@@ -141,7 +123,7 @@ footer {
 
 .crayon-btn:hover {
   background-color: var(--color-secondary);
-  transform: translate(4px, 4px);
+  transform: translateY(-2px);
   box-shadow: var(--shadow-hover);
 }
 
@@ -155,7 +137,6 @@ main {
   min-height: 60vh;
 }
 
-/* Index */
 .hero {
   display: flex;
   flex-direction: column;
@@ -164,8 +145,7 @@ main {
   padding: 4rem 2rem;
   background-color: var(--color-accent);
   color: var(--color-white);
-  border: 4px solid var(--color-text);
-  border-radius: var(--border-handdrawn-3);
+  border-radius: var(--border-radius-standard);
   box-shadow: var(--shadow-solid);
   margin-bottom: 4rem;
 }
@@ -174,7 +154,6 @@ main {
   color: var(--color-white);
   font-size: 3rem;
   margin-bottom: 1rem;
-  filter: drop-shadow(2px 2px 0px var(--color-text));
 }
 
 .hero p {
@@ -190,18 +169,17 @@ main {
 }
 
 .grid-resumen .crayon-box:nth-child(1) {
-  border-color: var(--color-primary);
+  border-top: 4px solid var(--color-primary);
 }
 
 .grid-resumen .crayon-box:nth-child(2) {
-  border-color: var(--color-secondary);
+  border-top: 4px solid var(--color-secondary);
 }
 
 .grid-resumen .crayon-box:nth-child(3) {
-  border-color: var(--color-accent);
+  border-top: 4px solid var(--color-accent);
 }
 
-/* Medios & Donde Comer & Proyecto (Grid genérico) */
 .page-title {
   text-align: center;
   font-size: 2.5rem;
@@ -221,16 +199,14 @@ main {
 .placeholder-img {
   width: 100%;
   height: 200px;
-  background-color: rgba(62, 39, 35, 0.1);
-  border: 3px dashed var(--color-text);
-  border-radius: var(--border-handdrawn-2);
+  background-color: rgba(62, 39, 35, 0.05);
+  border: 1px solid rgba(62, 39, 35, 0.2);
+  border-radius: var(--border-radius-standard);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
-  font-family: 'Sniglet', cursive;
   color: var(--color-text);
-  opacity: 0.7;
 }
 
 .info-blocks {
@@ -257,35 +233,27 @@ main {
   height: 300px;
 }
 
-
 /* ==========================================================================
-   Media Queries (Adaptación para Dispositivos Móviles)
+   Media Queries
    ========================================================================== */
 @media screen and (max-width: 768px) {
-
-  /* Cabecera: Apila el logo y el menú de navegación */
   header {
     flex-direction: column;
     padding: 1.5rem 1rem;
     gap: 1.5rem;
-    border-radius: 0 0 15px 15px;
-    /* Bordes más simples en móvil */
   }
 
-  /* Menú: Permite que los botones bajen de línea si no caben */
   nav ul {
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.8rem;
   }
 
-  /* Reduce el tamaño de fuente y padding en los botones del menú */
   nav a {
     font-size: 0.95rem;
     padding: 0.4rem 0.8rem;
   }
 
-  /* Banner Principal (Hero): Reduce márgenes y tamaño de texto */
   .hero {
     padding: 2.5rem 1.5rem;
     margin-bottom: 2.5rem;
@@ -299,13 +267,11 @@ main {
     font-size: 1rem;
   }
 
-  /* Títulos de páginas: más compactos */
   .page-title {
     font-size: 2rem;
     margin-bottom: 2rem;
   }
 
-  /* Ajuste de Grid: Permite columnas un poco más estrechas en móviles pequeños */
   .grid-resumen {
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   }
@@ -315,7 +281,6 @@ main {
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   }
 
-  /* Ajuste de sección "Sobre el proyecto" (Flexbox) */
   .info-blocks article {
     flex-direction: column;
     text-align: center;
@@ -327,7 +292,6 @@ main {
     height: 250px;
   }
 
-  /* Cajas Crayón: Menos padding en móviles para ganar espacio de lectura */
   .crayon-box {
     padding: 1.5rem;
   }
