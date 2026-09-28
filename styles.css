@@ -1,16 +1,16 @@
 /* ==========================================================================
-   Fuentes Tipográficas (Tomarik)
+   Fuentes Tipográficas (Halcom)
    ========================================================================== */
 @font-face {
-  font-family: 'Tomarik Serif';
-  src: url('Tomarik-Serif.woff2') format('woff2');
+  font-family: 'Halcom Medium';
+  src: url('Halcom-Medium-BF648a714568789.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Tomarik Introvert';
-  src: url('Tomarik-Introvert.woff2') format('woff2');
+  font-family: 'Halcom Regular';
+  src: url('Halcom-Regular-BF648a71453957a.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
@@ -44,13 +44,13 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text);
   /* Nueva fuente para el texto corrido */
-  font-family: 'Tomarik Introvert', sans-serif;
+font-family: 'Halcom Regular', sans-serif;
   line-height: 1.6;
 }
 
 h1, h2, h3, h4 {
   /* Nueva fuente para los títulos */
-  font-family: 'Tomarik Serif', serif;
+  font-family: 'Halcom Medium', sans-serif;
   color: var(--color-text);
   letter-spacing: 1px;
 }
@@ -128,7 +128,7 @@ footer {
   background-color: var(--color-primary);
   color: var(--color-white);
   padding: 0.8rem 2rem;
-  font-family: 'Tomarik Serif', serif; /* Botones con la fuente de título para destacar */
+  font-family: 'Halcom Medium', sans-serif; /* Botones con la fuente de título para destacar */
   font-size: 1.2rem;
   text-decoration: none;
   border: none;
