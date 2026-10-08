@@ -221,15 +221,15 @@ main {
 
 .hero-sand-overlay::before {
   background-image:
-     radial-gradient(circle, rgba(255, 255, 255, 0.95) 0 2px, transparent 3px),
-    radial-gradient(circle, rgba(255, 255, 255, 0.8) 0 1.8px, transparent 2.8px);
+    radial-gradient(circle, rgba(210, 170, 120, 0.95) 0 2px, transparent 3px),
+    radial-gradient(circle, rgba(190, 150, 100, 0.8) 0 1.8px, transparent 2.8px);
   animation: sand-fall-1 12s linear infinite;
 }
 
 .hero-sand-overlay::after {
   background-image:
-    radial-gradient(circle, rgba(255, 255, 255, 0.92) 0 2px, transparent 3px),
-    radial-gradient(circle, rgba(255, 255, 255, 0.82) 0 1.4px, transparent 2.5px);
+    radial-gradient(circle, rgba(220, 180, 130, 0.92) 0 2px, transparent 3px),
+    radial-gradient(circle, rgba(200, 160, 110, 0.82) 0 1.4px, transparent 2.5px);
   animation: sand-fall-2 15s linear infinite;
   animation-delay: 1s;
 }
