@@ -212,7 +212,7 @@ main {
 .hero-sand-overlay::after {
   content: "";
   position: absolute;
-  inset: -25% -10% auto -10%;
+  inset: -30% -10% auto -10%;
   height: 180%;
   background-repeat: repeat;
   background-size: 180px 180px;
