@@ -36,7 +36,7 @@
   box-sizing: border-box;
 }
 
-/* Textura de arena muy evidente para todo el body */
+/* Textura de arena muy evidente para todo el fondo */
 body {
   background-color: var(--color-bg);
   background-image:
@@ -159,7 +159,7 @@ main {
 }
 
 /* ===============================================================
-   HERO CON ANIMACIÓN FLUIDA DE ARENA CAYENDO CONTINUA Y LENTA
+   HERO: animación de arena cayendo continua, lenta y gris
    =============================================================== */
 .hero {
   position: relative;
@@ -170,103 +170,14 @@ main {
   text-align: center;
   padding: 6rem 2rem;
   background-color: var(--color-accent);
-  background-image:
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 1px,
-      rgba(0, 0, 0, 0.05) 1px,
-      rgba(0, 0, 0, 0.05) 2px
-    );
-  color: var(--color-white);
   border-radius: var(--border-radius-standard);
   box-shadow: var(--shadow-solid);
   margin-bottom: 4rem;
   overflow: hidden;
   min-height: 550px;
+  isolation: isolate;
 }
 
-/* Animación fluida, continua y MÁS LENTA de arena - SIN PARAR */
-@keyframes falling-sand-continuous-1 {
-  from {
-    transform: translateY(-200%);
-  }
-  to {
-    transform: translateY(200%);
-  }
-}
-
-@keyframes falling-sand-continuous-2 {
-  from {
-    transform: translateY(-200%);
-  }
-  to {
-    transform: translateY(200%);
-  }
-}
-
-@keyframes falling-sand-continuous-3 {
-  from {
-    transform: translateY(-200%);
-  }
-  to {
-    transform: translateY(200%);
-  }
-}
-
-/* Capa 1 de arena - Color GRIS (diferente al fondo) - 12 segundos */
-.hero::before {
-  content: "";
-  position: absolute;
-  top: -200%;
-  left: 0;
-  width: 100%;
-  height: 300%;
-  background-image:
-    radial-gradient(circle, rgba(120, 120, 120, 0.7) 0 2.5px, transparent 3.5px),
-    radial-gradient(circle, rgba(100, 100, 100, 0.6) 0 1.8px, transparent 2.8px);
-  background-size: 120px 180px;
-  background-repeat: repeat;
-  animation: falling-sand-continuous-1 12s linear infinite;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Capa 2 de arena - Color GRIS (diferente al fondo) - 15 segundos */
-.hero::after {
-  content: "";
-  position: absolute;
-  top: -200%;
-  left: 0;
-  width: 100%;
-  height: 300%;
-  background-image:
-     radial-gradient(circle, rgba(198, 122, 75, 0.7) 0 2.5px, transparent 3.5px),
-     radial-gradient(circle, rgba(170, 112, 80, 0.6) 0 1.8px, transparent 2.8px);
-  background-size: 150px 200px;
-  background-repeat: repeat;
-  animation: falling-sand-continuous-2 15s linear infinite;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Capa 3 de arena - Color GRIS (diferente al fondo) - 18 segundos */
-.hero-sand-overlay {
-  position: absolute;
-  top: -200%;
-  left: 0;
-  width: 100%;
-  height: 300%;
-  background-image:
-    radial-gradient(circle, rgba(125, 125, 125, 0.6) 0 2.2px, transparent 3.2px);
-  background-size: 140px 190px;
-  background-repeat: repeat;
-  animation: falling-sand-continuous-3 18s linear infinite;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Contenido del hero por encima de la animación */
 .hero h1,
 .hero p,
 .hero .crayon-btn {
@@ -288,6 +199,72 @@ main {
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
 }
 
+.hero-sand-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  background: transparent;
+}
+
+.hero-sand-overlay::before,
+.hero-sand-overlay::after {
+  content: "";
+  position: absolute;
+  inset: -25% -10% auto -10%;
+  height: 180%;
+  background-repeat: repeat;
+  background-size: 180px 180px;
+  opacity: 0.95;
+}
+
+.hero-sand-overlay::before {
+  background-image:
+    radial-gradient(circle, rgba(120, 120, 120, 0.8) 0 2px, transparent 3px),
+    radial-gradient(circle, rgba(100, 100, 100, 0.7) 0 1.8px, transparent 2.8px);
+  animation: sand-fall-1 12s linear infinite;
+}
+
+.hero-sand-overlay::after {
+  background-image:
+    radial-gradient(circle, rgba(130, 130, 130, 0.75) 0 2px, transparent 3px),
+    radial-gradient(circle, rgba(110, 110, 110, 0.68) 0 1.4px, transparent 2.5px);
+  animation: sand-fall-2 15s linear infinite;
+  animation-delay: 1s;
+}
+
+@keyframes sand-fall-1 {
+  0% {
+    transform: translateY(-30%) scale(1);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(40%) scale(1.05);
+    opacity: 0.25;
+  }
+}
+
+@keyframes sand-fall-2 {
+  0% {
+    transform: translateY(-35%) scale(1);
+    opacity: 0;
+  }
+  18% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(45%) scale(1.07);
+    opacity: 0.2;
+  }
+}
+
+/* ===============================================================
+   Sección resumen
+   =============================================================== */
 .grid-resumen {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
