@@ -244,7 +244,7 @@ main {
   }
   100% {
     transform: translateY(40%) scale(1.05);
-    opacity: 0.25;
+    opacity: 0.9;
   }
 }
 
@@ -258,7 +258,7 @@ main {
   }
   100% {
     transform: translateY(45%) scale(1.07);
-    opacity: 0.2;
+    opacity: 0.85;
   }
 }
 
