@@ -38,25 +38,13 @@
 
 /* Textura de arena muy evidente para todo el fondo */
 body {
-  background-color: var(--color-bg);
+  background-color: #f3e6cf;
   background-image:
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 1px,
-      rgba(139, 90, 43, 0.15) 1px,
-      rgba(139, 90, 43, 0.15) 2px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 1px,
-      rgba(139, 90, 43, 0.15) 1px,
-      rgba(139, 90, 43, 0.15) 2px
-    ),
-    radial-gradient(circle at 15% 25%, rgba(210, 180, 140, 0.2) 0%, transparent 50%),
-    radial-gradient(circle at 85% 75%, rgba(210, 180, 140, 0.18) 0%, transparent 50%);
-  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0.02)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='1200' viewBox='0 0 1600 1200'%3E%3Cg fill='none' stroke='%23d2b892' stroke-width='6' stroke-linecap='round' opacity='0.62'%3E%3Cpath d='M-50 70 C170 0, 260 120, 460 70 S800 20, 1060 110 S1360 130, 1660 70'/%3E%3Cpath d='M-50 170 C180 90, 260 220, 500 170 S820 110, 1050 210 S1380 220, 1660 180'/%3E%3Cpath d='M-50 270 C200 220, 310 330, 510 280 S810 230, 1080 320 S1380 330, 1660 280'/%3E%3Cpath d='M-50 370 C180 310, 290 430, 500 380 S820 320, 1090 420 S1390 430, 1660 380'/%3E%3Cpath d='M-50 470 C190 420, 300 520, 520 470 S830 410, 1100 500 S1410 520, 1660 480'/%3E%3Cpath d='M-50 570 C210 530, 320 630, 540 580 S840 520, 1110 610 S1400 620, 1660 580'/%3E%3Cpath d='M-50 670 C220 620, 340 720, 560 670 S850 610, 1120 700 S1420 710, 1660 680'/%3E%3Cpath d='M-50 770 C240 720, 350 830, 580 780 S860 720, 1130 810 S1430 820, 1660 780'/%3E%3Cpath d='M-50 870 C250 820, 360 930, 600 880 S870 820, 1150 910 S1450 930, 1660 880'/%3E%3Cpath d='M-50 970 C260 920, 370 1040, 620 990 S900 930, 1160 1020 S1470 1030, 1660 980'/%3E%3Cpath d='M-50 1070 C270 1020, 380 1140, 640 1090 S930 1030, 1170 1120 S1480 1130, 1660 1080'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
   color: var(--color-text);
   font-family: 'Halcom Regular', sans-serif;
   line-height: 1.6;
@@ -339,6 +327,7 @@ main {
   margin-bottom: 1rem;
   transition: transform 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease;
   border: 2px solid rgba(62, 39, 35, 0.1);
+  object-fit: cover;
 }
 
 .restaurant-card a:hover .restaurant-img {
