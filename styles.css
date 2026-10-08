@@ -221,14 +221,14 @@ main {
 
 .hero-sand-overlay::before {
   background-image:
-    radial-gradient(circle, rgba(120, 120, 120, 0.8) 0 2px, transparent 3px),
-    radial-gradient(circle, rgba(100, 100, 100, 0.7) 0 1.8px, transparent 2.8px);
+     radial-gradient(circle, rgba(122, 122, 122, 0.8) 0 2px, transparent 3px),
+    radial-gradient(circle, rgba(95, 95, 95, 0.7) 0 1.8px, transparent 2.8px);
   animation: sand-fall-1 12s linear infinite;
 }
 
 .hero-sand-overlay::after {
   background-image:
-    radial-gradient(circle, rgba(130, 130, 130, 0.75) 0 2px, transparent 3px),
+   radial-gradient(circle, rgba(130, 130, 130, 0.75) 0 2px, transparent 3px),
     radial-gradient(circle, rgba(110, 110, 110, 0.68) 0 1.4px, transparent 2.5px);
   animation: sand-fall-2 15s linear infinite;
   animation-delay: 1s;
