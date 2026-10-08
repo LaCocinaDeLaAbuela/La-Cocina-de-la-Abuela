@@ -159,7 +159,7 @@ main {
 }
 
 /* ===============================================================
-   HERO CON ANIMACIÓN FLUIDA DE ARENA CAYENDO CONTINUA
+   HERO CON ANIMACIÓN FLUIDA DE ARENA CAYENDO CONTINUA Y LENTA
    =============================================================== */
 .hero {
   position: relative;
@@ -186,7 +186,7 @@ main {
   min-height: 550px;
 }
 
-/* Animación fluida y continua de arena - SIN PARAR */
+/* Animación fluida, continua y MÁS LENTA de arena - SIN PARAR */
 @keyframes falling-sand-continuous-1 {
   from {
     transform: translateY(-200%);
@@ -214,7 +214,7 @@ main {
   }
 }
 
-/* Capa 1 de arena - Color marrón claro (diferente al fondo) */
+/* Capa 1 de arena - Color GRIS (diferente al fondo) - 12 segundos */
 .hero::before {
   content: "";
   position: absolute;
@@ -223,16 +223,16 @@ main {
   width: 100%;
   height: 300%;
   background-image:
-    radial-gradient(circle, rgba(215, 180, 100, 0.7) 0 2.5px, transparent 3.5px),
-    radial-gradient(circle, rgba(200, 160, 80, 0.6) 0 1.8px, transparent 2.8px);
+    radial-gradient(circle, rgba(120, 120, 120, 0.7) 0 2.5px, transparent 3.5px),
+    radial-gradient(circle, rgba(100, 100, 100, 0.6) 0 1.8px, transparent 2.8px);
   background-size: 120px 180px;
   background-repeat: repeat;
-  animation: falling-sand-continuous-1 5s linear infinite;
+  animation: falling-sand-continuous-1 12s linear infinite;
   pointer-events: none;
   z-index: 1;
 }
 
-/* Capa 2 de arena - Color arena dorado (diferente al fondo) */
+/* Capa 2 de arena - Color GRIS (diferente al fondo) - 15 segundos */
 .hero::after {
   content: "";
   position: absolute;
@@ -241,16 +241,16 @@ main {
   width: 100%;
   height: 300%;
   background-image:
-    radial-gradient(circle, rgba(230, 190, 110, 0.65) 0 2px, transparent 3px),
-    radial-gradient(circle, rgba(210, 170, 90, 0.55) 0 1.5px, transparent 2.5px);
+    radial-gradient(circle, rgba(130, 130, 130, 0.65) 0 2px, transparent 3px),
+    radial-gradient(circle, rgba(110, 110, 110, 0.55) 0 1.5px, transparent 2.5px);
   background-size: 150px 200px;
   background-repeat: repeat;
-  animation: falling-sand-continuous-2 6.5s linear infinite;
+  animation: falling-sand-continuous-2 15s linear infinite;
   pointer-events: none;
   z-index: 1;
 }
 
-/* Capa 3 de arena - Color marrón arena (diferente al fondo) */
+/* Capa 3 de arena - Color GRIS (diferente al fondo) - 18 segundos */
 .hero-sand-overlay {
   position: absolute;
   top: -200%;
@@ -258,10 +258,10 @@ main {
   width: 100%;
   height: 300%;
   background-image:
-    radial-gradient(circle, rgba(220, 170, 95, 0.6) 0 2.2px, transparent 3.2px);
+    radial-gradient(circle, rgba(125, 125, 125, 0.6) 0 2.2px, transparent 3.2px);
   background-size: 140px 190px;
   background-repeat: repeat;
-  animation: falling-sand-continuous-3 7s linear infinite;
+  animation: falling-sand-continuous-3 18s linear infinite;
   pointer-events: none;
   z-index: 1;
 }
