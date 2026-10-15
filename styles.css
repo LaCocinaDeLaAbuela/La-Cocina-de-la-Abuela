@@ -51,13 +51,19 @@ html, body { height: 100%; -webkit-font-smoothing: antialiased; -moz-osx-font-sm
    BODY: color exterior + .site-frame (marco que contiene la imagen)
    ---------------------------------------------------------------- */
 body {
-  background: var(--bg-out);
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  font-family: 'DMSans Regular', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  line-height: 1.6;
+  background-color: #efe6d5;                      /* color de fondo exterior */
+  background-image: url("Fondo pagina web.png");  /* imagen de fondo */
+  background-repeat: repeat-x;                    /* repite horizontalmente (no cortar) */
+  background-position: top center;                /* alinea la banda arriba-centro */
+  background-size: auto 240px;                    /* controla altura de la banda sin recortarla */
+  background-attachment: fixed;
   margin: 0;
+  padding: 0;
+  font-family: 'DMSans Regular', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  display: block;
 }
 
 /* ---------------------------------------
@@ -65,17 +71,13 @@ body {
    --------------------------------------- */
 .site-frame {
   width: 100%;
-  max-width: 1280px;
-  margin: 22px;
-  border-radius: var(--frame-radius);
-  overflow: hidden;
-  box-shadow: var(--frame-shadow);
-  border: 1px solid rgba(0,0,0,0.06);
-  background-image: url("Fondo pagina web.png");
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-size: cover;
-  background-color: rgba(243,231,210,0.95);
+  max-width: none;        /* ocupa todo el ancho disponible */
+  margin: 0;
+  border-radius: 0;       /* opcional: si quieres esquinas redondeadas pon 0.5rem o 18px */
+  overflow: visible;      /* permite que elementos internos se posicionen normalmente */
+  box-shadow: none;       /* quita la sombra de marco */
+  border: none;
+  background: transparent; /* la imagen ya está en body y se repite por toda la pantalla */
   display: block;
 }
 
@@ -106,8 +108,14 @@ nav a:hover, nav a.active { background-color: var(--color-accent); color: var(--
 footer { text-align:center; padding:2rem; margin-top:4rem; background-color: rgba(255,255,255,0.9); border-top: 1px solid rgba(62,39,35,0.15); }
 
 /* Main general */
-main { width: 90%; max-width: 1200px; margin: 0 auto; min-height: 60vh; }
-
+main {
+  width: 100%;
+  max-width: none;
+  padding: 1.25rem 4%;   /* espacio interior: ajusta 4% si quieres más o menos margen lateral */
+  margin: 0 auto;
+  min-height: 60vh;
+  box-sizing: border-box;
+}
 /* Crayon box */
 .crayon-box { background-color: rgba(255,255,255,0.9); border: 1px solid rgba(62,39,35,0.15); border-radius: var(--border-radius-standard); padding: 2rem; box-shadow: var(--shadow-solid); transition: transform 0.2s, box-shadow 0.2s; }
 .crayon-box:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
