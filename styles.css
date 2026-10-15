@@ -203,13 +203,29 @@ main {
 .restaurant-content p span { font-weight:700; color:var(--color-text); }
 
 /* Proyecto */
-.info-blocks { display:grid; gap:2rem; }
-.project-card { background-color: rgba(255,255,255,0.74); border-radius:18px; padding:1.25rem; }
+.info-blocks {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  align-items: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+}
+.project-card {
+  flex: 1 1 0;       /* cada tarjeta toma espacio flexible igual */
+  min-width: 260px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
 .text-content h2 { margin-bottom:0.8rem; font-size:1.8rem; color:var(--color-secondary); }
 .text-content p { font-size:1rem; line-height:1.7; color:rgba(62,39,35,0.85); }
 .preserve-lines { overflow-wrap: anywhere; word-break: break-word; hyphens: auto; }
-.mapa-section { margin-top:1.5rem; display:flex; justify-content:center; }
-.mapa-small { width:90%; max-width:640px; background:rgba(255,255,255,0.6); padding:10px; border-radius:12px; box-shadow:var(--shadow); }
+/* Mapas u otros bloques aparecen debajo (centrados) */
+.mapa-section { margin-top: 1.5rem; display:flex; justify-content:center; }
+.mapa-small { width:90%; max-width:640px; background: rgba(255,255,255,0.6); padding:10px; border-radius:12px; }
+
 .mapa-small img { width:100%; height:auto; display:block; border-radius:8px; object-fit:contain; }
 
 /* Media queries */
