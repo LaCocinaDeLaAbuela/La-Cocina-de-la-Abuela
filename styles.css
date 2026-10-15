@@ -54,32 +54,31 @@ html, body { height: 100%; -webkit-font-smoothing: antialiased; -moz-osx-font-sm
 body {
   margin: 0;
   padding: 0;
-  background-color: #efe6d5;                     /* color de respaldo fuera de la imagen */
-  background-image: url("Fondo pagina web.png"); /* usa tu imagen real */
-  background-repeat: no-repeat;                   /* NO repetir */
-  background-position: top center;                /* alineada arriba en el centro */
-  background-size: cover;                         /* cubre el área visible (ajusta si quieres) */
-  background-attachment: fixed;                   /* se queda fijo al hacer scroll (opcional) */
-  font-family: 'DMSans Regular', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background-color: #efe6d5; /* color exterior */
+  font-family: 'DMSans Regular', system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  color: #3E2723;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  min-height: 100vh;
-  display: block;
 }
+
 
 /* ---------------------------------------
    MARCO CENTRAL (.site-frame) -- ENCUDRADO
    --------------------------------------- */
 .site-frame {
-  width: 100%;
-  max-width: none;     /* permite que la página use todo el ancho si hace falta */
-  margin: 0;
-  padding: 0;
-  border-radius: 0;
-  overflow: visible;
+  width: 100vw;                       /* ocupa todo el ancho de la ventana */
+  margin: 0;                          /* sin separación lateral (la banda se ve de lado a lado) */
+  padding: 0;                         /* no padding en el marco */
+  background-image: url("Fondo pagina web.png");
+  background-repeat: no-repeat;       /* no repetir */
+  background-position: top center;    /* alinear arriba-centro */
+  background-size: cover;             /* cubre el ancho/alto del área */
+  background-attachment: fixed;       /* opcional: fija el fondo al scroll */
+  overflow: hidden;                   /* evita que la imagen “salte” fuera */
+  border-radius: 0;                   /* sin redondeo en el borde externo */
   box-shadow: none;
   border: none;
-  background: transparent; /* el fondo está en body ahora */
+  display: block;
 }
 
 /* Aseguro que header/main/footer estén por encima del fondo */
@@ -107,6 +106,14 @@ nav a:hover, nav a.active { background-color: var(--color-accent); color: var(--
 
 /* Footer */
 footer { text-align:center; padding:2rem; margin-top:4rem; background-color: rgba(255,255,255,0.9); border-top: 1px solid rgba(62,39,35,0.15); }
+
+.container {
+  width: 100%;
+  max-width: 1200px;      /* ancho máximo del contenido (ajusta si quieres) */
+  margin: 0 auto;
+  padding: 1.25rem 4%;    /* espacios laterales dentro del contenedor */
+  box-sizing: border-box;
+}
 
 /* Main general */
 main {
