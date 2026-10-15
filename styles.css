@@ -40,9 +40,9 @@
   --frame-shadow: 0 18px 40px rgba(0,0,0,0.18);
   --bg-out: #eadbbc;            /* mismo tono crema de la ilustración */
   --shadow: var(--shadow-solid); /* antes se usaba sin estar definida */
-  --site-max: 1520px;           /* ancho máximo del contenido */
-  --frame-gap: clamp(0.5rem, 1.6vw, 1.5rem);
-  --gutter: clamp(0.9rem, 2.5vw, 2.25rem);
+  --site-max: 1880px;           /* ancho máximo del contenido */
+  --frame-gap: clamp(0.35rem, 1vw, 1rem);
+  --gutter: clamp(0.8rem, 2vw, 2rem);
 }
 
 /* ===============================================================
@@ -70,17 +70,6 @@ body {
   color: var(--color-text);
   background: transparent;
 }
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100vh;
-  height: 100lvh;   /* no salta cuando la barra del navegador móvil se oculta */
-  z-index: -1;
-  pointer-events: none;
-  background: var(--bg-out) url("Fondo pagina web.png") center 60% / cover no-repeat;
-}
 
 /* ---------------------------------------
    MARCO CENTRAL (.site-frame)
@@ -97,7 +86,11 @@ body::before {
   min-height: calc(100dvh - 2 * var(--frame-gap));
   overflow: hidden;
   border-radius: var(--frame-radius);
-  background: rgba(246, 238, 223, 0.97);
+  /* ilustración DENTRO del contenedor: cubre todo el marco, centrada;
+     el velo crema mantiene legibles los títulos */
+  background:
+    linear-gradient(rgba(246,238,223,0.45), rgba(246,238,223,0.45)),
+    var(--bg-out) url("Fondo pagina web.png") center 55% / cover no-repeat;
   box-shadow: var(--frame-shadow);
 }
 .site-frame > main { flex: 1 0 auto; }   /* el footer siempre queda abajo */
@@ -246,7 +239,7 @@ main {
 }
 @media screen and (max-width: 600px) {
   :root { --frame-gap: 0.4rem; --gutter: 0.8rem; }
-  .site-frame { background: rgba(246,238,223,0.88); border-radius:14px; }
+  .site-frame { border-radius:12px; }
   .menu-item { flex:0 0 78vw; width:78vw; height:min(105vw, 460px); }
 }
 @media screen and (max-width: 480px) {
