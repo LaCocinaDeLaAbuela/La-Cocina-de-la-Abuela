@@ -209,15 +209,28 @@ main {
 .media-description { font-size:0.96rem; line-height:1.55; color:rgba(62,39,35,0.8); text-align:left; margin-top:0.25rem; }
 
 /* Dónde Comer */
-.restaurant-card { padding:1rem; border-radius:18px; }
-.restaurant-content { display:flex; flex-direction:column; gap:0.5rem; }
-.restaurant-top { display:flex; align-items:center; justify-content:space-between; gap:0.75rem; }
-.restaurant-top h3 { margin:0; text-align:left; font-size:1.4rem; flex:1; }
-.maps-btn { display:inline-flex; align-items:center; justify-content:center; width:42px; height:42px; background:rgba(19,131,167,0.12); color:var(--color-accent); border-radius:50%; text-decoration:none; transition:transform 0.2s ease, background 0.2s ease; flex-shrink:0; }
-.maps-btn:hover { transform:translateY(-2px); background:rgba(19,131,167,0.2); }
-.maps-btn svg { width:18px; height:18px; }
-.restaurant-content p { margin:0; font-size:0.98rem; line-height:1.4; color:rgba(62,39,35,0.8); text-align:left; }
-.restaurant-content p span { font-weight:700; color:var(--color-text); }
+.restaurants-grid .restaurant-card .restaurant-img-frame {
+  width: 100%;
+  height: 260px;               /* alto fijo para todas las tarjetas */
+  border-radius: 12px;
+  overflow: hidden;            /* recorta lo que sobre */
+  display: flex;
+  align-items: center;
+  justify-content: center;     /* centra la imagen en el contenedor */
+  background: #fff;            /* respaldo visual uniforme */
+  padding: 0;                  /* quitamos padding para que la imagen llene el marco */
+  border: none;                /* elimina el borde fino si existe */
+  box-shadow: none;            /* quita sombras en el marco */
+}
+
+.restaurants-grid .restaurant-card .restaurant-img-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;           /* usar 'cover' para consistencia (recorta centrado) */
+  object-position: center;
+  display: block;
+  border-radius: 0;            /* asegurar que la imagen no tenga radio propio */
+}
 
 /* Proyecto */
 .info-blocks {
@@ -263,6 +276,13 @@ main {
   .media-image-frame, .restaurant-img-frame { height:180px; }
   .hero { padding:2rem 1rem; min-height:300px; }
   nav a { font-size:0.95rem; padding:0.4rem 0.7rem; }
+}
+/* Responsive: ajustar la altura en pantallas pequeñas */
+@media screen and (max-width: 900px) {
+  .restaurants-grid .restaurant-card .restaurant-img-frame { height: 200px; }
+}
+@media screen and (max-width: 480px) {
+  .restaurants-grid .restaurant-card .restaurant-img-frame { height: 180px; }
 }
 
 /* Fin de archivo */
