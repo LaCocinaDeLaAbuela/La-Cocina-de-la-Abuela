@@ -54,11 +54,12 @@ html, body { height: 100%; -webkit-font-smoothing: antialiased; -moz-osx-font-sm
 body {
   margin: 0;
   padding: 0;
-  background-color: #efe6d5; /* color exterior */
+  background-color: #efe6d5; /* color de fondo fuera del cuadro */
   font-family: 'DMSans Regular', system-ui, -apple-system, "Segoe UI", Roboto, Arial;
   color: #3E2723;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
 
@@ -66,19 +67,28 @@ body {
    MARCO CENTRAL (.site-frame) -- ENCUDRADO
    --------------------------------------- */
 .site-frame {
-  width: 100vw;                       /* ocupa todo el ancho de la ventana */
-  margin: 0;                          /* sin separación lateral (la banda se ve de lado a lado) */
-  padding: 0;                         /* no padding en el marco */
+  position: relative;          /* para que ::before esté contenido */
+  width: 100vw;                /* ocupa todo el ancho de la ventana */
+  margin: 0;                   /* sin margen externo */
+  padding: 0;                  /* sin padding global (se usa padding en secciones) */
+  overflow: hidden;            /* evita que la imagen/elementos se salgan */
+  border-radius: 0;            /* sin redondeo global */
+  background: transparent;     /* la imagen la ponemos en ::before para control */
+}
+.site-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;                                  /* cubrir todo el .site-frame */
+  pointer-events: none;
+  z-index: 0;
   background-image: url("Fondo pagina web.png");
-  background-repeat: no-repeat;       /* no repetir */
-  background-position: top center;    /* alinear arriba-centro */
-  background-size: cover;             /* cubre el ancho/alto del área */
-  background-attachment: fixed;       /* opcional: fija el fondo al scroll */
-  overflow: hidden;                   /* evita que la imagen “salte” fuera */
-  border-radius: 0;                   /* sin redondeo en el borde externo */
-  box-shadow: none;
-  border: none;
-  display: block;
+  background-repeat: no-repeat;
+  background-position: top center;
+  /* Ajusta la altura visible de la banda sin recortarla: 
+     auto 260px mantiene la proporción horizontal y fija la altura en 260px.
+     Cambia 260px por 200/300 según se vea mejor. */
+  background-size: auto 260px;
+  background-color: rgba(243,231,210,0.95); /* fondo de respaldo dentro del marco */
 }
 
 /* Aseguro que header/main/footer estén por encima del fondo */
@@ -107,20 +117,14 @@ nav a:hover, nav a.active { background-color: var(--color-accent); color: var(--
 /* Footer */
 footer { text-align:center; padding:2rem; margin-top:4rem; background-color: rgba(255,255,255,0.9); border-top: 1px solid rgba(62,39,35,0.15); }
 
-.container {
-  width: 100%;
-  max-width: 1200px;      /* ancho máximo del contenido (ajusta si quieres) */
-  margin: 0 auto;
-  padding: 1.25rem 4%;    /* espacios laterales dentro del contenedor */
-  box-sizing: border-box;
-}
+
 
 /* Main general */
 main {
   width: 100%;
-  max-width: 1200px; /* ancho máximo del contenido */
-  margin: 0 auto;
-  padding: 1.25rem 4%; /* espacio lateral cómodo */
+  max-width: none;
+  margin: 0;
+  padding: 0;                /* usaremos padding por sección si hace falta */
   box-sizing: border-box;
 }
 /* Crayon box */
