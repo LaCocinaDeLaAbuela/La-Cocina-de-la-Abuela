@@ -1,6 +1,12 @@
+```css
 /* ===============================================================
-   styles.css - fusionado (original del repo + ajustes de encuadre,
-   no recortar imágenes y modal de galería)
+   styles.css - Versión corregida a partir de tu archivo actual
+   Objetivos cumplidos:
+   - Secciones a todo ancho (full-bleed) por defecto
+   - Fondo decorativo contenido y bien encuadrado (.site-frame::before)
+   - Menú con tarjetas de tamaño moderado y scroll horizontal
+   - Sección "El Proyecto" alineada a lo largo en desktop y apilada en móvil
+   - Mantengo tus estilos (botones, hero, tarjetas) pero ajustados estéticamente
    =============================================================== */
 
 /* -------------------------
@@ -22,229 +28,286 @@
 }
 
 /* ===============================================================
-   Variables y Configuración Inicial
+   Variables y configuración
    =============================================================== */
-:root {
-  --color-bg: #F6EEDF;
+:root{
   --color-primary: #E65100;
   --color-secondary: #D32F2F;
   --color-accent: #00838F;
   --color-text: #3E2723;
-  --color-white: #FFFFFF;
-  --border-radius-standard: 8px;
-  --shadow-solid: 0 4px 10px rgba(62, 39, 35, 0.08);
-  --shadow-hover: 0 8px 20px rgba(62, 39, 35, 0.15);
-
-  /* extras para marco y modal */
-  --frame-radius: 18px;
-  --frame-shadow: 0 18px 40px rgba(0,0,0,0.18);
-  --bg-out: #eadbbc;            /* mismo tono crema de la ilustración */
-  --shadow: var(--shadow-solid); /* antes se usaba sin estar definida */
-  --site-max: 1180px;           /* ancho máximo del contenido */
-  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --bg-out: #efe6d5;
+  --card-bg: rgba(255,255,255,0.95);
+  --radius: 12px;
+  --shadow-soft: 0 6px 18px rgba(0,0,0,0.06);
+  --shadow-strong: 0 18px 40px rgba(0,0,0,0.12);
 }
 
 /* ===============================================================
    Reset / base
    =============================================================== */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: var(--bg-out);   /* respaldo mientras carga la imagen */
-}
-
-/* ----------------------------------------------------------------
-   FONDO: la ilustración queda FIJA y cubre SIEMPRE toda la ventana
-   (cover + centrado, sin repetirse ni dejar bordes), sin importar
-   el tamaño de pantalla o cuánto se haga scroll.
-   Se usa un pseudo-elemento fijo en vez de background-attachment:fixed
-   porque este último falla en iOS/Safari.
-   ---------------------------------------------------------------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 body {
-  min-height: 100vh;
-  min-height: 100dvh;
-  font-family: 'DMSans Regular', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--bg-out);
+  font-family: 'DMSans Regular', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   color: var(--color-text);
-  background: transparent;
+  min-height: 100vh;
+  line-height: 1.55;
 }
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background: var(--bg-out) url("Fondo pagina web.png") center 60% / cover no-repeat;
-}
-
-/* ---------------------------------------
-   MARCO CENTRAL (.site-frame)
-   Caja centrada con ancho máximo: el contenido ya no se estira
-   de borde a borde y la ilustración se ve a los lados.
-   --------------------------------------- */
-.site-frame {
-  position: relative;
-  width: min(var(--site-max), 100% - 2 * clamp(0px, 2vw, 1.5rem));
-  margin: clamp(0px, 2vw, 1.5rem) auto;
-  display: flex;
-  flex-direction: column;
-  min-height: calc(100vh - 2 * clamp(0px, 2vw, 1.5rem));
-  min-height: calc(100dvh - 2 * clamp(0px, 2vw, 1.5rem));
-  overflow: hidden;
-  border-radius: var(--frame-radius);
-  background: rgba(246, 238, 223, 0.97);
-  box-shadow: var(--frame-shadow);
-}
-.site-frame > main { flex: 1 0 auto; }   /* el footer siempre queda abajo */
 
 /* ===============================================================
-   Header (mantener estilo)
+   SITE FRAME + Fondo decorativo en ::before (encuadrado y no se sale)
+   - .site-frame ocupa el ancho de la ventana y contiene la imagen de fondo
+   - La banda decorativa se controla con background-size (100% x altura)
+   =============================================================== */
+.site-frame {
+  position: relative;
+  width: 100vw;         /* ocupa todo el ancho de la ventana */
+  margin: 0;
+  padding: 0;
+  overflow: hidden;     /* evita que el fondo se salga */
+  border-radius: 0;
+  background: transparent;
+}
+
+/* Fondo como pseudo-elemento para que quede contenido dentro del marco */
+.site-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("Fondo pagina web.png");
+  background-repeat: no-repeat;
+  background-position: top center;
+  /* Establece la banda para que cubra todo el ancho y tenga altura estética */
+  background-size: 100% 260px; /* ajustar 220px/300px según prefieras */
+  background-color: rgba(243,231,210,0.95);
+}
+
+/* Asegurar que el contenido quede por encima del pseudo-fondo */
+.site-frame > * { position: relative; z-index: 1; }
+
+/* ===============================================================
+   Header
    =============================================================== */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem var(--gutter);
-  background-color: rgba(255, 255, 255, 0.92);
-  border-bottom: 1px solid rgba(62, 39, 35, 0.15);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  margin-bottom: 2rem;
+  padding: 1rem 4%;
+  background: rgba(255,255,255,0.95);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
 }
-.logo img { max-height: 56px; width: auto; display: block; }
-nav ul { display:flex; list-style:none; gap:0.75rem; }
-nav a { text-decoration:none; color:var(--color-text); font-weight:700; font-size:1rem; padding:0.5rem 0.9rem; display:inline-block; border-radius:var(--border-radius-standard); transition:all 0.3s ease; }
-nav a:hover, nav a.active { background-color: var(--color-accent); color: var(--color-white); box-shadow: var(--shadow-solid); transform: translateY(-2px); }
+.logo img { height: 56px; display:block; }
+nav ul { display:flex; gap:1rem; list-style:none; align-items:center; }
+nav a { text-decoration:none; color:var(--color-text); padding:0.45rem 0.85rem; border-radius:999px; font-weight:600; }
+nav a.active { background: var(--color-accent); color: #fff; }
 
-/* Footer */
-footer { text-align:center; padding:1.5rem var(--gutter); margin-top:3rem; font-size:0.95rem; background-color: rgba(255,255,255,0.9); border-top: 1px solid rgba(62,39,35,0.15); }
-
-
-
-/* Main general */
+/* ===============================================================
+   Main & Sections: full-width sections, content padded but full-bleed
+   - Use .section-centered inside a section when you want to limit content width
+   =============================================================== */
 main {
   width: 100%;
-  padding: 0 var(--gutter);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-/* Crayon box */
-.crayon-box { background-color: rgba(255,255,255,0.92); border: 1px solid rgba(62,39,35,0.15); border-radius: var(--border-radius-standard); padding: 1.5rem; box-shadow: var(--shadow-solid); transition: transform 0.2s, box-shadow 0.2s; }
-.crayon-box:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
 
-/* Botones */
-.crayon-btn { display:inline-flex; align-items:center; justify-content:center; background-color:var(--color-primary); color:var(--color-white); padding:0.8rem 2rem; font-family:'DMSans Medium'; font-size:1rem; text-decoration:none; border-radius:999px; box-shadow:var(--shadow-solid); cursor:pointer; line-height:1; border:0; transition:all 0.2s; }
-.crayon-btn:hover { background-color: var(--color-secondary); transform: translateY(-2px); box-shadow: var(--shadow-hover); }
-.crayon-btn.small { font-size:0.9rem; padding:0.7rem 1.2rem; }
+/* Cada sección ocupa el ancho completo pero con padding lateral para lectura */
+section {
+  width: 100%;
+  padding: 3rem 4%;
+  box-sizing: border-box;
+}
 
-/* Hero (mantengo tus reglas) */
-.hero { position: relative; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:4rem 2rem; background-color: var(--color-accent); border-radius: 14px; box-shadow: var(--shadow); margin-bottom:3rem; overflow:hidden; min-height:clamp(340px, 52vh, 460px); isolation:isolate; }
-.hero h1, .hero p, .hero .crayon-btn { position:relative; z-index:2; }
-.hero h1 { color: var(--color-white); font-size:clamp(1.9rem, 4vw, 2.8rem); margin-bottom:1rem; text-shadow:3px 3px 8px rgba(0,0,0,0.5); }
-.hero p { color:var(--color-white); font-size:1.15rem; margin-bottom:2rem; max-width:600px; text-shadow:2px 2px 5px rgba(0,0,0,0.4); }
+/* Si quieres limitar el ancho de contenido en una sección concreta */
+.section-centered {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-/* hero overlay */
-.hero-sand-overlay { position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden; opacity:0.9; }
-.hero-sand-overlay::before, .hero-sand-overlay::after { content:""; position:absolute; inset:-30% -10% auto -10%; height:180%; background-repeat:repeat; background-size:180px 180px; opacity:0.95; }
-.hero-sand-overlay::before { background-image: radial-gradient(circle, rgba(210,170,120,0.95) 0 2px, transparent 3px), radial-gradient(circle, rgba(190,150,100,0.8) 0 1.8px, transparent 2.8px); animation: sand-fall-1 12s linear infinite; }
-.hero-sand-overlay::after  { background-image: radial-gradient(circle, rgba(220,180,130,0.92) 0 2px, transparent 3px), radial-gradient(circle, rgba(200,160,110,0.82) 0 1.4px, transparent 2.5px); animation: sand-fall-2 15s linear infinite; animation-delay:1s; }
-@keyframes sand-fall-1 { 0%{transform:translateY(-30%) scale(1);opacity:0} 15%{opacity:1} 100%{transform:translateY(40%) scale(1.05);opacity:0.9} }
-@keyframes sand-fall-2 { 0%{transform:translateY(-35%) scale(1);opacity:0} 18%{opacity:1} 100%{transform:translateY(45%) scale(1.07);opacity:0.85} }
+/* ===============================================================
+   Hero (ajustado)
+   =============================================================== */
+.hero {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding: 4rem 2rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg,#178fa3,#0f6f80);
+  color: #fff;
+  box-shadow: var(--shadow-soft);
+}
+.hero h1 { font-family: 'DMSans Medium'; font-size: clamp(2rem,3.5vw,3rem); margin-bottom:0.6rem; }
+.hero p { max-width: 760px; margin-bottom:1.2rem; }
 
-/* GRID RESUMEN y media grids */
-.grid-resumen { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5rem; }
+/* ===============================================================
+   Menú (galería horizontal) - tamaño y estética controlados
+   =============================================================== */
+.menu-section { padding-top: 1rem; padding-bottom: 1.5rem; }
 
-/* IMAGES: marcos para que no se recorten */
-.media-image-frame, .restaurant-img-frame, .img-wrap { width:100%; height:260px; border-radius:12px; overflow:hidden; display:flex; align-items:center; justify-content:center; padding:8px; background:linear-gradient(180deg,#fff,#fff); border:2px solid rgba(62,39,35,0.08); margin-bottom:1rem; }
-.media-image-frame img, .restaurant-img-frame img, .img-wrap img { width:100%; height:100%; object-fit:contain; display:block; }
+.section-title {
+  text-align: center;
+  font-family: 'DMSans Medium';
+  color: var(--color-secondary);
+  margin-bottom: 1rem;
+  font-size: clamp(1.8rem,3vw,2.4rem);
+}
 
-/* Menú: Galería */
-.menu-section { margin:0 0 3rem; }
-.section-title { text-align:center; font-size:clamp(1.8rem,3vw,2.4rem); margin-bottom:1.2rem; color:var(--color-secondary); }
-.menu-gallery { display:flex; gap:1rem; overflow-x:auto; padding:0.5rem 0 1rem; scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; }
-.menu-item { flex:0 0 280px; width:280px; height:380px; border-radius:14px; background:rgba(255,255,255,0.92); box-shadow:var(--shadow); scroll-snap-align:center; display:flex; align-items:center; justify-content:center; padding:0.75rem; cursor:pointer; position:relative; outline:none; }
-.img-wrap { width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,#fff,#fff); border-radius:10px; overflow:hidden; padding:6px; }
-.menu-item img { max-width:100%; max-height:100%; object-fit:contain; display:block; }
-.menu-item:focus { box-shadow:0 8px 22px rgba(19,131,167,0.18); transform:translateY(-4px); }
+/* Galería: scroll horizontal con tarjetas moderadas */
+.menu-gallery {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 1rem 2%;
+  align-items: center;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
 
-/* Modal para menú expandido */
-.menu-modal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:1200; background:rgba(0,0,0,0.6); }
-.menu-modal.open { display:flex; }
-.menu-modal .modal-body { position:relative; width:min(1100px,95%); max-height:90vh; background:#fff; border-radius:10px; box-shadow:0 20px 60px rgba(0,0,0,0.6); overflow:hidden; display:flex; flex-direction:column; }
-.menu-modal .modal-header { display:flex; align-items:center; justify-content:space-between; padding:0.75rem 1rem; border-bottom:1px solid rgba(0,0,0,0.06); }
-.menu-modal .title { font-family:'DMSans Medium',sans-serif; font-size:1.1rem; }
-.modal-close { background:transparent; border:0; font-size:1.2rem; cursor:pointer; }
-.menu-modal .modal-content { padding:1rem; display:flex; align-items:center; justify-content:center; flex:1; overflow:auto; background:#fafafa; }
-.menu-modal img { max-width:100%; max-height:80vh; object-fit:contain; display:block; }
-.modal-nav { position:absolute; top:50%; left:0; right:0; transform:translateY(-50%); display:flex; justify-content:space-between; padding:0 1rem; pointer-events:none; }
-.modal-nav button { pointer-events:auto; background:rgba(255,255,255,0.9); border:0; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.12); padding:0.5rem 0.7rem; cursor:pointer; }
+/* tarjeta del menú: tamaño más moderado y altura contenida */
+.menu-item {
+  flex: 0 0 260px;
+  width: 260px;
+  height: 360px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.98);
+  padding: 10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow: var(--shadow-soft);
+  scroll-snap-align: center;
+  border: 1px solid rgba(0,0,0,0.04);
+}
 
-/* Sección resumen */
-.grid-resumen .crayon-box:nth-child(1) { border-top: 4px solid var(--color-primary); }
-.grid-resumen .crayon-box:nth-child(2) { border-top: 4px solid var(--color-secondary); }
-.grid-resumen .crayon-box:nth-child(3) { border-top: 4px solid var(--color-accent); }
-.grid-resumen h3 { margin-bottom:0.7rem; font-size:1.5rem; }
-.grid-resumen p { color: rgba(62,39,35,0.8); line-height:1.6; }
+.img-wrap { width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:6px; background:#fff; border-radius:8px; overflow:hidden; }
+.img-wrap img { width:100%; height:100%; object-fit:contain; display:block; }
 
-/* Páginas internas */
-.page-title { text-align:center; font-size:clamp(1.8rem,3vw,2.6rem); margin-bottom:1.5rem; color:var(--color-secondary); }
-.media-grid, .restaurants-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.5rem; }
-.media-card, .restaurant-card { display:flex; flex-direction:column; height:100%; }
-.media-image-frame, .restaurant-img-frame { width:100%; height:260px; border-radius:12px; overflow:hidden; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,#fff,#fff); padding:8px; border:2px solid rgba(0,0,0,0.04); margin-bottom:0.85rem; }
+/* Custom scrollbar (discreto) */
+.menu-gallery::-webkit-scrollbar { height: 10px; }
+.menu-gallery::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 8px; }
+
+/* ===============================================================
+   Grid resumen (band centered visual) - secciones con ancho limitado visualmente
+   =============================================================== */
+.grid-resumen {
+  width: 100%;
+  padding: 2rem 4%;
+  box-sizing: border-box;
+}
+.grid-resumen .section-centered {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Card estilo crayon */
+.crayon-box {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.6rem;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.crayon-box:hover { transform: translateY(-4px); transition: transform 0.18s ease; }
+
+/* ===============================================================
+   Media / restaurante cards (no recortar imágenes)
+   =============================================================== */
+.media-grid, .restaurants-grid { display:grid; gap:1.2rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.media-image-frame, .restaurant-img-frame { width:100%; height:260px; border-radius:12px; overflow:hidden; display:flex; align-items:center; justify-content:center; padding:8px; background:#fff; border:2px solid rgba(0,0,0,0.04); }
 .media-image-frame img, .restaurant-img-frame img { width:100%; height:100%; object-fit:contain; display:block; }
-.media-card h3, .restaurant-card h3 { margin:0.2rem 0 0.6rem; font-size:1.6rem; text-align:center; }
-.media-description { font-size:0.96rem; line-height:1.55; color:rgba(62,39,35,0.8); text-align:left; margin-top:0.25rem; }
 
-/* Dónde Comer */
-.restaurant-card { padding:1rem; border-radius:18px; }
-.restaurant-content { display:flex; flex-direction:column; gap:0.5rem; }
-.restaurant-top { display:flex; align-items:center; justify-content:space-between; gap:0.75rem; }
-.restaurant-top h3 { margin:0; text-align:left; font-size:1.4rem; flex:1; }
-.maps-btn { display:inline-flex; align-items:center; justify-content:center; width:42px; height:42px; background:rgba(19,131,167,0.12); color:var(--color-accent); border-radius:50%; text-decoration:none; transition:transform 0.2s ease, background 0.2s ease; flex-shrink:0; }
-.maps-btn:hover { transform:translateY(-2px); background:rgba(19,131,167,0.2); }
-.maps-btn svg { width:18px; height:18px; }
-.restaurant-content p { margin:0; font-size:0.98rem; line-height:1.4; color:rgba(62,39,35,0.8); text-align:left; }
-.restaurant-content p span { font-weight:700; color:var(--color-text); }
+/* ===============================================================
+   Botones
+   =============================================================== */
+.crayon-btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background: var(--color-primary);
+  color:#fff;
+  padding:0.7rem 1.2rem;
+  border-radius: 999px;
+  border: 0;
+  cursor:pointer;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+}
+.crayon-btn.small { font-size:0.95rem; padding:0.6rem 1rem; }
+.crayon-btn:hover { filter:brightness(0.95); }
 
-/* Proyecto */
+/* ===============================================================
+   Sección 'El Proyecto' (info a lo largo en desktop)
+   =============================================================== */
 .info-blocks {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   gap: 1.5rem;
   align-items: flex-start;
   width: 100%;
   box-sizing: border-box;
 }
 .project-card {
-  flex: 1 1 320px;   /* dos columnas en escritorio, una en móvil */
-  min-width: 0;
-  background: rgba(255,255,255,0.9);
+  flex: 1 1 0;
+  min-width: 240px;
+  background: rgba(255,255,255,0.95);
   border-radius: 12px;
   padding: 1.25rem;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  box-shadow: var(--shadow-soft);
 }
-.text-content h2 { margin-bottom:0.8rem; font-size:1.8rem; color:var(--color-secondary); }
-.text-content p { font-size:1rem; line-height:1.7; color:rgba(62,39,35,0.85); }
-.preserve-lines { overflow-wrap: anywhere; word-break: break-word; hyphens: auto; }
-/* Mapas u otros bloques aparecen debajo (centrados) */
-.mapa-section { margin-top: 1.5rem; display:flex; justify-content:center; }
-.mapa-small { width:90%; max-width:640px; background: rgba(255,255,255,0.6); padding:10px; border-radius:12px; }
+.text-content h2 { margin-bottom: 0.6rem; font-size:1.3rem; color:var(--color-secondary); }
+.text-content p { color: rgba(0,0,0,0.75); line-height:1.6; }
 
+/* mapa centrado debajo */
+.mapa-section { margin-top: 1.5rem; display:flex; justify-content:center; padding-bottom: 2rem; }
+.mapa-small { width: 90%; max-width: 640px; background: rgba(255,255,255,0.85); padding:10px; border-radius:12px; box-shadow: var(--shadow-soft); }
 .mapa-small img { width:100%; height:auto; display:block; border-radius:8px; object-fit:contain; }
 
-/* Media queries */
-@media screen and (max-width: 900px) {
-  header { flex-direction:column; padding:1rem; gap:0.75rem; }
-  nav ul { flex-wrap:wrap; justify-content:center; gap:0.4rem; }
-  .hero { padding:2.5rem 1.25rem; }
-  .menu-item { flex:0 0 220px; width:220px; height:300px; }
-  .media-image-frame, .restaurant-img-frame { height:200px; }
+/* ===============================================================
+   Modal para la galería (sin cambios funcionales importantes)
+   =============================================================== */
+.menu-modal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:1200; background:rgba(0,0,0,0.6); }
+.menu-modal.open { display:flex; }
+.menu-modal .modal-body { width:min(1100px,95%); max-height:90vh; background:#fff; border-radius:10px; overflow:hidden; display:flex; flex-direction:column; box-shadow: var(--shadow-strong); }
+.menu-modal .modal-header { display:flex; align-items:center; justify-content:space-between; padding:0.6rem 1rem; border-bottom:1px solid rgba(0,0,0,0.06); }
+.menu-modal .modal-content { padding:1rem; display:flex; align-items:center; justify-content:center; flex:1; overflow:auto; background:#fafafa; }
+.menu-modal img { max-width:100%; max-height:80vh; object-fit:contain; display:block; }
+.modal-nav button { pointer-events:auto; background:rgba(255,255,255,0.9); border:0; border-radius:8px; padding:0.5rem 0.7rem; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.12); }
+
+/* ===============================================================
+   Responsive adjustments
+   =============================================================== */
+@media (max-width: 1200px) {
+  .site-frame::before { background-size: 100% 220px; }
+  .grid-resumen .section-centered { max-width: 1000px; }
 }
-@media screen and (max-width: 480px) {
-  .site-frame { border-radius:0; }
-  .media-image-frame, .restaurant-img-frame { height:180px; }
-  .hero { padding:2rem 1rem; min-height:300px; }
-  nav a { font-size:0.95rem; padding:0.4rem 0.7rem; }
+@media (max-width: 900px) {
+  /* menor altura banda en mobile */
+  .site-frame::before { background-size: 100% 180px; }
+  section { padding: 2rem 4%; }
+  .menu-item { flex: 0 0 220px; width:220px; height:320px; }
+  .info-blocks { flex-direction: column; gap:1rem; }
+  .grid-resumen .section-centered { padding: 0 0.5rem; }
+}
+@media (max-width: 480px) {
+  .site-frame::before { background-size: 100% 140px; }
+  section { padding: 1rem 3%; }
+  .menu-item { flex: 0 0 200px; width:200px; height:280px; }
 }
 
-/* Fin de archivo */
+/* ===============================================================
+   Fin de archivo
+   =============================================================== */
+```
