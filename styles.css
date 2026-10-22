@@ -200,7 +200,18 @@ main {
 .grid-resumen p { color: rgba(62,39,35,0.8); line-height:1.6; }
 
 /* Páginas internas */
-.page-title { text-align:center; font-size:clamp(1.8rem,3vw,2.6rem); margin-bottom:1.5rem; color:var(--color-secondary); }
+.page-title,
+.section-title {
+  display: table;              /* el fondo se ajusta al texto, no a todo el ancho */
+  margin: 0 auto 1.5rem;       /* centrado */
+  padding: 0.45rem 1.4rem;
+  background: rgba(255, 252, 246, 0.92);
+  border: 1px solid rgba(62, 39, 35, 0.10);
+  border-radius: 999px;        /* forma de pastilla */
+  box-shadow: 0 6px 16px rgba(62, 39, 35, 0.12);
+  text-align: center;
+  text-wrap: balance;          /* si baja de renglón, queda parejo */
+}
 .media-grid, .restaurants-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.5rem; }
 .media-card, .restaurant-card { display:flex; flex-direction:column; height:100%; }
 .media-image-frame, .restaurant-img-frame { width:100%; height:260px; border-radius:12px; overflow:hidden; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,#fff,#fff); padding:8px; border:2px solid rgba(0,0,0,0.04); margin-bottom:0.85rem; }
@@ -362,6 +373,14 @@ main {
   font-weight: 600;
   color: var(--color-secondary);
   text-align: left;
+}
+@media (max-width: 640px) {
+  .page-title,
+  .section-title {
+    padding: 0.4rem 1rem;
+    border-radius: 18px;
+    max-width: 100%;
+  }
 }
 
 /* Móvil: Jerome a la izquierda, globo a la derecha */
