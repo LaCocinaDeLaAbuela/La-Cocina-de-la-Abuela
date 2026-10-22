@@ -375,13 +375,13 @@ main {
 
   /* Jerome más pequeño para que quepa el texto */
   .jerome-photo {
-    flex: 0 0 96px;
-    height: 125px;
+    flex: 0 0 125px;
+    height: 165px;
   }
   .jerome-photo::before {
-    width: 88px;
-    height: 88px;
-    border-width: 2px;
+    width: 112px;
+    height: 112px;
+    border-width: 3px;
   }
 
   /* Globo: ocupa el resto del ancho */
