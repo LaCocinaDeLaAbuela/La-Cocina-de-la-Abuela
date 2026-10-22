@@ -364,22 +364,55 @@ main {
   text-align: left;
 }
 
-/* Móvil: Jerome arriba, globo debajo con la colita hacia arriba */
+/* Móvil: Jerome a la izquierda, globo a la derecha */
 @media (max-width: 640px) {
   .jerome-banner {
-    flex-direction: column;
-    gap: 1.25rem;
+    flex-direction: row;       /* lado a lado */
+    align-items: center;
+    gap: 0.9rem;
+    margin: 1rem auto 1.5rem;
   }
+
+  /* Jerome más pequeño para que quepa el texto */
+  .jerome-photo {
+    flex: 0 0 96px;
+    height: 125px;
+  }
+  .jerome-photo::before {
+    width: 88px;
+    height: 88px;
+    border-width: 2px;
+  }
+
+  /* Globo: ocupa el resto del ancho */
   .jerome-bubble {
-    text-align: center;
-    padding: 1.25rem 1.25rem 1.5rem;
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+    padding: 0.9rem 1rem;
+    border-radius: 20px;
   }
+
+  /* Colita otra vez al costado izquierdo, apuntando a Jerome */
   .jerome-bubble::before {
-    left: 50%;
-    top: -13px;
-    transform: translateX(-50%) rotate(135deg);
+    left: -10px;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    transform: translateY(-50%) rotate(45deg);
   }
-  .section-kicker { text-align: center; }
+
+  .jerome-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.25rem;
+  }
+
+  .section-kicker {
+    font-size: 1.05rem;
+    line-height: 1.25;
+    text-align: left;
+  }
 }
 
 
