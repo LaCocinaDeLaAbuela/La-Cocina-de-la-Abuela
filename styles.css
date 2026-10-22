@@ -211,6 +211,7 @@ main {
   box-shadow: 0 6px 16px rgba(62, 39, 35, 0.12);
   text-align: center;
   text-wrap: balance;          /* si baja de renglón, queda parejo */
+   color: var(--color-secondary);
 }
 .media-grid, .restaurants-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.5rem; }
 .media-card, .restaurant-card { display:flex; flex-direction:column; height:100%; }
