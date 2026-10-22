@@ -261,7 +261,13 @@ main {
 }
 .text-content h2 { margin-bottom:0.8rem; font-size:1.8rem; color:var(--color-secondary); }
 .text-content p { font-size:1rem; line-height:1.7; color:rgba(62,39,35,0.85); }
-.preserve-lines { overflow-wrap: anywhere; word-break: break-word; hyphens: auto; }
+.preserve-lines {
+  hyphens: manual;
+  -webkit-hyphens: manual;
+  overflow-wrap: break-word;  /* solo parte una palabra si NO cabe sola en una línea (ej. un link larguísimo) */
+  word-break: normal;
+  text-wrap: pretty;          /* evita palabras sueltas al final del párrafo */
+}
 /* Mapas u otros bloques aparecen debajo (centrados) */
 .mapa-section { margin-top: 1.5rem; display:flex; justify-content:center; }
 .mapa-small { width:90%; max-width:640px; background: rgba(255,255,255,0.6); padding:10px; border-radius:12px; }
