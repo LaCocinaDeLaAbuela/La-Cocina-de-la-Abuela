@@ -294,10 +294,14 @@ main {
   width: min(100%, 960px);
 }
 
-/* Personaje grande, de pie sobre un círculo, saliéndose por arriba */
+/* Foto de perfil de Jerome (estilo WhatsApp): círculo con solo cabeza y torso.
+   Ajustes rápidos:
+   --jerome-size  tamaño del círculo
+   --jerome-zoom  acercamiento (1 = ancho completo, 1.2 = más cerca de la cara)
+   --jerome-y     qué parte vertical se ve (0% = arriba, 100% = abajo)  */
 .jerome-photo {
   --jerome-size: 170px;
-  --jerome-zoom: 1.5;
+  --jerome-zoom: 1.8;
   --jerome-y: 0%;
   position: relative;
   flex: 0 0 var(--jerome-size);
@@ -309,8 +313,6 @@ main {
   border: 3px solid #fff;
   box-shadow: 0 8px 20px rgba(62,39,35,0.18);
 }
-
-
 
 .jerome-photo img {
   display: block;
@@ -324,31 +326,92 @@ main {
   filter: none;
 }
 
-/* Globo de diálogo */
+/* Globo de diálogo (estilo mensaje de chat) */
+.jerome-banner { justify-content: center; gap: 1.1rem; }
+
 .jerome-bubble {
   position: relative;
-  flex: 1;
-  padding: 1.5rem 2rem;
-  background: #fff;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 640px;
+  padding: 1rem 5.4rem 1.15rem 1.5rem;
+  background: linear-gradient(180deg, #ffffff 0%, #fffaf1 100%);
   border: 1px solid rgba(62,39,35,0.10);
-  border-radius: 26px;
+  border-radius: 8px 26px 26px 26px;      /* la esquina junto a Jerome es la "colita" */
   box-shadow: 0 12px 28px rgba(62,39,35,0.12);
 }
 
-/* colita del globo apuntando a Jerome */
+/* colita del globo, arriba junto a la foto */
 .jerome-bubble::before {
   content: "";
   position: absolute;
-  left: -13px;
-  top: 50%;
-  width: 26px;
-  height: 26px;
+  left: -9px;
+  top: 20px;
+  width: 18px;
+  height: 18px;
   background: #fff;
   border-left: 1px solid rgba(62,39,35,0.10);
   border-bottom: 1px solid rgba(62,39,35,0.10);
-  border-bottom-left-radius: 6px;
-  transform: translateY(-50%) rotate(45deg);
+  border-bottom-left-radius: 5px;
+  transform: rotate(45deg);
 }
+
+/* nombre del remitente, como en un chat */
+.jerome-name {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary, #e65100);
+}
+
+.jerome-title {
+  margin: 0;
+  font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--color-secondary);
+  text-align: left;
+  text-wrap: balance;
+}
+
+/* separador corto de color */
+.jerome-sub {
+  position: relative;
+  margin: 0.8rem 0 0;
+  padding-top: 0.7rem;
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  line-height: 1.3;
+  color: var(--color-text);
+  opacity: 0.85;
+}
+.jerome-sub::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 38px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--color-primary, #e65100);
+}
+
+/* ícono decorativo a la derecha */
+.jerome-icon {
+  position: absolute;
+  right: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--color-accent, #00838f);
+  background: rgba(0,131,143,0.10);
+}
+.jerome-icon svg { width: 24px; height: 24px; display: block; }
 
 .jerome-label {
   display: block;
@@ -388,32 +451,23 @@ main {
 
   /* Jerome más pequeño para que quepa el texto */
   .jerome-photo {
-    flex: 0 0 125px;
-    height: 165px;
-  }
-  .jerome-photo::before {
-    width: 112px;
-    height: 112px;
-    border-width: 3px;
+    --jerome-size: 92px;
+    border-width: 2px;
   }
 
   /* Globo: ocupa el resto del ancho */
   .jerome-bubble {
     flex: 1;
-    min-width: 0;
-    text-align: left;
-    padding: 0.9rem 1rem;
-    border-radius: 20px;
+    max-width: none;
+    padding: 0.8rem 1rem 0.9rem;
+    border-radius: 6px 20px 20px 20px;
   }
-
-  /* Colita otra vez al costado izquierdo, apuntando a Jerome */
-  .jerome-bubble::before {
-    left: -10px;
-    top: 50%;
-    width: 20px;
-    height: 20px;
-    transform: translateY(-50%) rotate(45deg);
-  }
+  .jerome-bubble::before { top: 16px; left: -8px; width: 15px; height: 15px; }
+  .jerome-icon { display: none; }
+  .jerome-name { font-size: 0.66rem; }
+  .jerome-title { font-size: 1.1rem; }
+  .jerome-sub { margin-top: 0.55rem; padding-top: 0.55rem; font-size: 0.95rem; }
+  .jerome-sub::before { width: 30px; }
 
   .jerome-label {
     font-size: 0.68rem;
