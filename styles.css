@@ -297,7 +297,7 @@ main {
 /* Personaje grande, de pie sobre un círculo, saliéndose por arriba */
 .jerome-photo {
   --jerome-size: 170px;
-  --jerome-zoom: 1;
+  --jerome-zoom: 1.5;
   --jerome-y: 0%;
   position: relative;
   flex: 0 0 var(--jerome-size);
