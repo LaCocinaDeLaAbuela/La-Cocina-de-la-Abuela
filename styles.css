@@ -296,39 +296,32 @@ main {
 
 /* Personaje grande, de pie sobre un círculo, saliéndose por arriba */
 .jerome-photo {
+  --jerome-size: 170px;
+  --jerome-zoom: 1;
+  --jerome-y: 0%;
   position: relative;
-  flex: 0 0 200px;
-  height: 230px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-/* círculo de fondo (detrás del personaje) */
-.jerome-photo::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 180px;
-  height: 180px;
+  flex: 0 0 var(--jerome-size);
+  width: var(--jerome-size);
+  height: var(--jerome-size);
   border-radius: 50%;
+  overflow: hidden;                       /* recorta todo lo que salga del círculo */
   background: linear-gradient(135deg, rgba(230,81,0,0.22), rgba(0,131,143,0.18));
   border: 3px solid #fff;
-  box-shadow: 0 8px 20px rgba(62,39,35,0.15);
+  box-shadow: 0 8px 20px rgba(62,39,35,0.18);
 }
 
+
+
 .jerome-photo img {
-  position: relative;      /* encima del círculo */
-  z-index: 1;
   display: block;
-  height: 100%;            /* más alto que el círculo: "sale" por arriba */
-  width: auto;
-  max-width: 100%;
-  object-fit: contain;
-  object-position: center bottom;
-  filter: drop-shadow(0 6px 8px rgba(62,39,35,0.25));
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;                      /* llena el círculo sin deformar */
+  object-position: 50% var(--jerome-y);   /* encuadra desde arriba: cabeza + torso */
+  transform: scale(var(--jerome-zoom));
+  transform-origin: 50% 0%;
+  filter: none;
 }
 
 /* Globo de diálogo */
