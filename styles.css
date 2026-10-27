@@ -451,7 +451,7 @@ main {
 
   /* Jerome más pequeño para que quepa el texto */
   .jerome-photo {
-    --jerome-size: 92px;
+    --jerome-size: clamp(64px, 22vw, 92px);
     border-width: 2px;
   }
 
@@ -465,7 +465,7 @@ main {
   .jerome-bubble::before { top: 16px; left: -8px; width: 15px; height: 15px; }
   .jerome-icon { display: none; }
   .jerome-name { font-size: 0.66rem; }
-  .jerome-title { font-size: 1.1rem; }
+  .jerome-title { font-size: clamp(0.66rem, 3.5vw, 1.1rem); white-space: nowrap; }
   .jerome-sub { margin-top: 0.55rem; padding-top: 0.55rem; font-size: 0.95rem; }
   .jerome-sub::before { width: 30px; }
 
