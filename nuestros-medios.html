@@ -27,33 +27,75 @@
         <h1 class="page-title">Experiencia Transmedia</h1>
 
         <section class="media-grid">
-            <article class="crayon-box media-card">
+
+            <!-- APP: abre el prototipo de Figma dentro de la página.
+                 data-embed = link de Figma en versión "embed" (embed.figma.com)
+                 data-open  = link original, para el botón "Abrir aparte" -->
+            <article class="crayon-box media-card"
+                     data-media="figma"
+                     data-title="App: La receta de Jerome"
+                     data-embed="https://embed.figma.com/proto/JfFdbm5VR39Rb65REIuNCj/Los-isle%C3%B1os---Di-Granmada-Kicin--Copy-?node-id=1-3&p=f&t=HE8rbmRYqoZkGKFX-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A3&embed-host=share"
+                     data-open="https://www.figma.com/proto/JfFdbm5VR39Rb65REIuNCj/Los-isle%C3%B1os---Di-Granmada-Kicin--Copy-?node-id=1-3&p=f&t=HE8rbmRYqoZkGKFX-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A3&show-proto-sidebar=1"
+                     role="button" tabindex="0" aria-haspopup="dialog">
                 <div class="media-image-frame">
                     <img src="Mockup app.jpeg" alt="Mockup de la app">
+                    <span class="media-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Jugar</span>
                 </div>
-                <h3>App</h3>
+                <h3>App: La receta de Jerome</h3>
                 <p class="media-description">
-                    Experiencia interactiva donde se introducen a vendedores de la tienda para la recolección de ingredientes de una receta tradicional.
+                    Acompaña a Jerome en un juego interactivo para reunir los ingredientes de una receta tradicional isleña y aprender de ella.
                 </p>
             </article>
 
-            <article class="crayon-box media-card">
+            <!-- REALIDAD VIRTUAL: video borrador. Para cambiarlo por el definitivo
+                 solo reemplaza el archivo videos/realidad-virtual.mp4 (mismo nombre). -->
+            <article class="crayon-box media-card"
+                     data-media="video"
+                     data-title="Realidad Virtual: Manos a la Olla"
+                     data-src="videos/realidad-virtual.mp4"
+                     data-poster="RealidadVirtual.jpeg"
+                     role="button" tabindex="0" aria-haspopup="dialog">
                 <div class="media-image-frame">
                     <img src="RealidadVirtual.jpeg" alt="Realidad virtual">
+                    <span class="media-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Ver video</span>
                 </div>
-                <h3>Realidad Virtual</h3>
+                <h3>Realidad Virtual: Manos a la Olla</h3>
                 <p class="media-description">
-                    Juego de cocina donde el turista prepara paso a paso una receta tradicional isleña.
+                    Cocina en primera persona: prepara paso a paso una receta tradicional isleña y descubre los secretos que guarda el fogón.
                 </p>
             </article>
 
-            <article class="crayon-box media-card">
+            <!-- REALIDAD AUMENTADA: video (demo del QR / experiencia) -->
+            <article class="crayon-box media-card"
+                     data-media="video"
+                     data-title="Realidad aumentada: Recuerdos Revelados"
+                     data-src="videos/realidad-aumentada.mp4"
+                     data-poster="RealidadVirtual.jpeg"
+                     role="button" tabindex="0" aria-haspopup="dialog">
+                <div class="media-image-frame">
+                    <img src="RealidadVirtual.jpeg" alt="Realidad aumentada">
+                    <span class="media-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Ver video</span>
+                </div>
+                <h3>Realidad aumentada: Recuerdos Revelados</h3>
+                <p class="media-description">
+                    Escanea el código QR de esta tarjeta y apunta tu celular a las polaroids: verás cómo cobran vida y se mueven ante tus ojos.
+                </p>
+            </article>
+
+            <!-- ANIMACIÓN -->
+            <article class="crayon-box media-card"
+                     data-media="video"
+                     data-title="Animación: Cuando la Abuela Cocinaba"
+                     data-src="Qr realidad aumentada .png"
+                     data-poster="Mockup animacion.jpeg"
+                     role="button" tabindex="0" aria-haspopup="dialog">
                 <div class="media-image-frame">
                     <img src="Mockup animacion.jpeg" alt="Mockup de la animación">
+                    <span class="media-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Ver QR</span>
                 </div>
-                <h3>Animación</h3>
+                <h3>Animación: Cuando la Abuela Cocinaba</h3>
                 <p class="media-description">
-                    Narración de los recuerdos de infancia de Jerome con su abuela, mostrando las costumbres y rituales asociados a la cocina de la abuela y por qué es importante conservarlos.
+                    Jerome recuerda su infancia junto a su abuela y nos muestra los rituales de su cocina y por qué vale la pena conservarlos.
                 </p>
             </article>
         </section>
@@ -63,5 +105,7 @@
         <p>&copy; 2026 Di Granmada Kicin (La Cocina de la Abuela) - Proyecto Transmedia.</p>
     </footer>
          </div>
+
+    <script src="media-modal.js"></script>
 </body>
 </html>
