@@ -310,6 +310,7 @@
     clearStage();
     resetSize();
     root.hidden = false;
+   if (window.sinViudas) { window.sinViudas.fix(titleEl); window.sinViudas.fix(captionEl); }
     document.body.classList.add('mm-lock');
     buildStage(card);
     animateIn(card);
