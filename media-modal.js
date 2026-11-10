@@ -61,16 +61,16 @@
     });
   }
 
-  function showMissing() {
-    spinner.classList.add('is-hidden');
-    var box = document.createElement('div');
-    box.className = 'mm-missing';
-    box.innerHTML =
-      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>' +
-      '<strong>Este video estará disponible muy pronto</strong>' +
-      '<span>Estamos preparando la versión final.</span>';
-    stage.appendChild(box);
-  }
+  function showMissing(what) {
+  spinner.classList.add('is-hidden');
+  var box = document.createElement('div');
+  box.className = 'mm-missing';
+  box.innerHTML =
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>' +
+    '<strong>' + (what || 'Este video') + ' estará disponible muy pronto</strong>' +
+    '<span>Estamos preparando la versión final.</span>';
+  stage.appendChild(box);
+}
 
   function buildIframe(url, allow) {
     var f = document.createElement('iframe');
@@ -86,6 +86,22 @@
     var kind = card.getAttribute('data-media');
     spinner.classList.remove('is-hidden');
     extLink.hidden = true;
+
+     if (kind === 'image') {
+  var isrc = card.getAttribute('data-src');
+  if (!isrc) { showMissing('Este código QR'); return; }
+  var img = document.createElement('img');
+  img.className = 'mm-image';
+  img.alt = card.getAttribute('data-alt') || titleEl.textContent;
+  img.addEventListener('load', function () { spinner.classList.add('is-hidden'); });
+  img.addEventListener('error', function () {
+    if (img.parentNode) img.parentNode.removeChild(img);
+    showMissing('Este código QR');
+  });
+  stage.appendChild(img);
+  img.src = isrc;
+  return;
+}
 
     if (kind === 'figma') {
       var open = card.getAttribute('data-open');
